@@ -28,11 +28,9 @@ public class UsuarioService {
 			throw new ResponseStatusException(
 					HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
 
-		int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
 		
-		if(idade < 18)
-			throw new ResponseStatusException(
-					HttpStatus.BAD_REQUEST, "Usuário menor de 18 anos", null);
+		
+		
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -87,6 +85,8 @@ public class UsuarioService {
 				usuarioLogin.get().setNome(usuario.get().getNome());
 				usuarioLogin.get().setSenha(usuario.get().getSenha());
 				usuarioLogin.get().setToken(authHeader);
+				usuarioLogin.get().setFoto(usuario.get().getFoto());
+				usuarioLogin.get().setTipo(usuario.get().getTipo());
 
 				return usuarioLogin;
 
